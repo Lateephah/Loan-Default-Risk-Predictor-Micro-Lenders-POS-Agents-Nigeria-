@@ -84,13 +84,13 @@ exist publicly, but not a substitute for validation on real lender data.
    identically at train and inference time.
 2. **Class imbalance handling** : the dataset has a ~15% default rate. Three strategies were
    compared rather than assumed:
-   - **Baseline** — no adjustment
-   - **Class weighting** — `class_weight='balanced'` / `scale_pos_weight`
+   - **Baseline**: no adjustment
+   - **Class weighting**: `class_weight='balanced'` / `scale_pos_weight`
    - **SMOTE**: synthetic minority oversampling, applied inside an `imblearn` pipeline to
      avoid test-set leakage
 3. **Models**: Logistic Regression, Random Forest, XGBoost, each run under all three
    strategies above (9 total variants), evaluated on a held-out, stratified test set.
-4. **Explainability** — feature importance for every model; risk-scoring functions
+4. **Explainability** : feature importance for every model; risk-scoring functions
    return a plain-language risk band alongside the probability.
 
 ## Results
@@ -122,11 +122,11 @@ per-model feature importance.)*
 
 ## How to Run
 
-**Option A — Notebook (Google Colab, recommended):**
+**Option A -  Notebook (Google Colab, recommended):**
 1. Upload `loan_default_risk_predictor.ipynb` and `synthetic_loan_data.csv` to Colab
 2. Run all cells top to bottom (the first cell installs `shap`; `xgboost` is preinstalled)
 
-**Option B — Scripts (local/repo):**
+**Option B - Scripts (local/repo):**
 ```bash
 pip install -r requirements.txt   # pandas, scikit-learn, xgboost, imbalanced-learn, seaborn, joblib
 
@@ -150,9 +150,9 @@ python predict.py --model results/models/xgboost_pipeline.joblib \
 - **Synthetic data**: results reflect the generation logic, not verified real-world outcomes.
   Next step is validating against real (anonymized, consented) lender repayment data.
 - **Risk thresholds** (Low <30%, Medium 30–60%, High >60%) are reasonable round numbers, not
-  derived from a specific lender's cost-benefit analysis — production use would calibrate
+  derived from a specific lender's cost-benefit analysis, production use would calibrate
   these to a real risk appetite.
-- **No cross-validation** — a single stratified train/test split was used; k-fold CV would
+- **No cross-validation**  a single stratified train/test split was used; k-fold CV would
   give more robust metric estimates at the cost of runtime.
 - **Individual-level explainability** (e.g. SHAP per applicant) is a natural next addition,
   global feature importance is implemented; per-prediction "why" explanations are not yet.
