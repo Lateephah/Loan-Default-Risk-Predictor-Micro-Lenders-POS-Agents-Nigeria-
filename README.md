@@ -109,7 +109,7 @@ exist publicly, but not a substitute for validation on real lender data.
      avoid test-set leakage
 3. **Models** — Logistic Regression, Random Forest, XGBoost, each run under all three
    strategies above (9 total variants), evaluated on a held-out, stratified test set.
-4. **Explainability** — global feature importance for every model; risk-scoring functions
+4. **Explainability** — feature importance for every model; risk-scoring functions
    return a plain-language risk band alongside the probability.
 
 ## Results
@@ -179,4 +179,4 @@ python predict.py --model results/models/xgboost_pipeline.joblib \
 ## Acknowledgments
 
 - Central Bank of Nigeria (CBN) — public reports used to ground synthetic data ranges
-- Built as a capstone project for [Fellowship/Program name]
+- Built as a capstone project for 3MTT NextGen/ AI & ML Track
