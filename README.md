@@ -1,10 +1,10 @@
-# Loan Default Risk Predictor — Micro-Lenders & POS Agents (Nigeria)
+# Loan Default Risk Predictor for Micro-Lenders & POS Agents (Nigeria)
 
 A tabular machine learning model that predicts the likelihood of loan default, built for
 Nigerian micro-lenders and POS (Point-of-Sale) agents who need a fast, explainable
 repayment-risk check before disbursing small, short-tenor loans.
 
-**[▶ Watch the 3-minute demo video](#)** *(replace with your video link)*
+**[▶ Watch the 3-minute demo video](https://www.linkedin.com/posts/latifahusainibashir_3mtt-nextgen-machinelearning-ugcPost-7490940128937455616-QV1U/?utm_source=share&utm_medium=member_desktop&rcm=ACoAACfpDowB952onpiDYQ9xaOzua6pOcyQuZB8)** 
 
 ---
 
