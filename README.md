@@ -122,28 +122,10 @@ per-model feature importance.)*
 
 ## How to Run
 
-**Option A -  Notebook (Google Colab, recommended):**
+** Notebook (Google Colab, recommended):**
 1. Upload `loan_default_risk_predictor.ipynb` and `synthetic_loan_data.csv` to Colab
-2. Run all cells top to bottom (the first cell installs `shap`; `xgboost` is preinstalled)
+2. Run all cells top to bottom 
 
-**Option B - Scripts (local/repo):**
-```bash
-pip install -r requirements.txt   # pandas, scikit-learn, xgboost, imbalanced-learn, seaborn, joblib
-
-# regenerate the dataset (optional,  synthetic_loan_data.csv is already included)
-python generate_synthetic_loan_data.py --n 20000 --seed 42 --out synthetic_loan_data.csv
-
-# train all models, write metrics/plots/results_summary.md
-python train.py --data synthetic_loan_data.csv --outdir results
-
-# score a single applicant
-python predict.py --model results/models/xgboost_pipeline.joblib \
-    --record '{"age": 29, "gender": "Female", "state": "Lagos", ...}'
-
-# score a batch of applicants from CSV
-python predict.py --model results/models/xgboost_pipeline.joblib \
-    --csv new_applicants.csv --out scored_applicants.csv
-```
 
 ## Limitations & Future Work
 
