@@ -39,20 +39,20 @@ applicant's details (manual input) or a batch of applicants (CSV upload).
 - **Output:** a default-risk probability (0–100%), a risk band (Low / Medium / High), and
   the key factors behind the score
 - **Models compared:** Logistic Regression, Random Forest, and XGBoost, each evaluated under
-  three class-imbalance strategies (baseline, class weighting, SMOTE) — nine variants total
+  three class-imbalance strategies (baseline, class weighting, SMOTE), nine variants total
 - **Deployed model:** XGBoost with class weighting (see [Results](#results) for why)
 
 
 ## Data
 
 **No public, row-level loan-default dataset exists for the Nigerian micro-lending / POS-agent
-market** — that kind of individual borrower data is proprietary to lenders and protected under
+market** that kind of individual borrower data is proprietary to lenders and protected under
 banking privacy regulation. This was confirmed by checking the Central Bank of Nigeria's
 public data (Statistical Bulletins, Financial Stability & Microfinance Reports), which publish
 only **aggregate** statistics, never row-level borrower records.
 
 **Approach:** a documented **synthetic dataset** of 20,000 borrower records, generated to
-reflect the Nigerian micro-lending / POS-agent context specifically — including features not
+reflect the Nigerian micro-lending / POS-agent context specifically including features not
 present in generic global credit datasets:
 
 | Category | Features |
@@ -65,7 +65,7 @@ present in generic global credit datasets:
 | Behavioral | repayment history score |
 | Target | `defaulted` (0/1) |
 
-The `defaulted` outcome is **not random** — it's generated from a transparent logistic
+The `defaulted` outcome is **not random**, it's generated from a transparent logistic
 combination of realistic risk drivers (debt-to-income ratio, repayment history, collateral,
 existing loan burden, business tenure, trade association membership, etc.) plus noise, so the
 dataset has genuine, learnable structure. Full generation logic and reasoning is documented in
@@ -73,22 +73,22 @@ dataset has genuine, learnable structure. Full generation logic and reasoning is
 
 **Known limitation, stated plainly:** this is synthetic data. Model performance and feature
 importances reflect the logic used to generate it, not verified real-world Nigerian lending
-outcomes — an appropriate approach for a technique-focused capstone where no real dataset can
+outcomes, an appropriate approach for a technique-focused capstone where no real dataset can
 exist publicly, but not a substitute for validation on real lender data.
 
 ## Methodology
 
-1. **Preprocessing** — numeric features median-imputed and scaled; categorical features
+1. **Preprocessing** : numeric features median-imputed and scaled; categorical features
    mode-imputed and one-hot encoded; binary flags passed through. Wrapped in a
    `ColumnTransformer` inside a single `Pipeline` per model, so preprocessing is applied
    identically at train and inference time.
-2. **Class imbalance handling** — the dataset has a ~15% default rate. Three strategies were
+2. **Class imbalance handling** : the dataset has a ~15% default rate. Three strategies were
    compared rather than assumed:
    - **Baseline** — no adjustment
    - **Class weighting** — `class_weight='balanced'` / `scale_pos_weight`
-   - **SMOTE** — synthetic minority oversampling, applied inside an `imblearn` pipeline to
+   - **SMOTE**: synthetic minority oversampling, applied inside an `imblearn` pipeline to
      avoid test-set leakage
-3. **Models** — Logistic Regression, Random Forest, XGBoost, each run under all three
+3. **Models**: Logistic Regression, Random Forest, XGBoost, each run under all three
    strategies above (9 total variants), evaluated on a held-out, stratified test set.
 4. **Explainability** — feature importance for every model; risk-scoring functions
    return a plain-language risk band alongside the probability.
@@ -112,7 +112,7 @@ variants — the metric that jointly rewards recall and precision. Logistic Regr
 Weight) achieves higher raw recall (72.3% vs 62.1%), but at a steep cost: it wrongly flags
 **28.7%** of genuinely good borrowers as risky, versus **14.8%** for XGBoost. For a real
 lender, rejecting roughly 1 in 4 legitimate customers to catch slightly more defaulters would
-likely undermine adoption and work against the financial-inclusion goal this project targets —
+likely undermine adoption and work against the financial-inclusion goal this project targets,
 so XGBoost's more balanced trade-off was chosen as the deployed model. This trade-off is a
 business judgment as much as a technical one, and is documented transparently rather than
 hidden behind a single headline metric.
@@ -130,7 +130,7 @@ per-model feature importance.)*
 ```bash
 pip install -r requirements.txt   # pandas, scikit-learn, xgboost, imbalanced-learn, seaborn, joblib
 
-# regenerate the dataset (optional — synthetic_loan_data.csv is already included)
+# regenerate the dataset (optional,  synthetic_loan_data.csv is already included)
 python generate_synthetic_loan_data.py --n 20000 --seed 42 --out synthetic_loan_data.csv
 
 # train all models, write metrics/plots/results_summary.md
@@ -154,10 +154,10 @@ python predict.py --model results/models/xgboost_pipeline.joblib \
   these to a real risk appetite.
 - **No cross-validation** — a single stratified train/test split was used; k-fold CV would
   give more robust metric estimates at the cost of runtime.
-- **Individual-level explainability** (e.g. SHAP per applicant) is a natural next addition —
+- **Individual-level explainability** (e.g. SHAP per applicant) is a natural next addition,
   global feature importance is implemented; per-prediction "why" explanations are not yet.
 
 ## Acknowledgments
 
-- Central Bank of Nigeria (CBN) — public reports used to ground synthetic data ranges
+- Central Bank of Nigeria (CBN): public reports used to ground synthetic data ranges
 - Built as a capstone project for 3MTT NextGen/ AI & ML Track
