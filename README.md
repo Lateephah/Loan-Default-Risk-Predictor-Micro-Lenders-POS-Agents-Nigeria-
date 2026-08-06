@@ -108,7 +108,7 @@ exist publicly, but not a substitute for validation on real lender data.
 | XGBoost (SMOTE) | 0.878 | 0.706 | 0.361 | 0.478 | 0.817 |
 
 **Deployed model: XGBoost (Class Weight).** It has the best F1-score (0.511) among all nine
-variants — the metric that jointly rewards recall and precision. Logistic Regression (Class
+variants, the metric that jointly rewards recall and precision. Logistic Regression (Class
 Weight) achieves higher raw recall (72.3% vs 62.1%), but at a steep cost: it wrongly flags
 **28.7%** of genuinely good borrowers as risky, versus **14.8%** for XGBoost. For a real
 lender, rejecting roughly 1 in 4 legitimate customers to catch slightly more defaulters would
