@@ -122,7 +122,7 @@ per-model feature importance.)*
 
 ## How to Run
 
-** Notebook (Google Colab, recommended):**
+**Notebook (Google Colab, recommended):**
 1. Upload `loan_default_risk_predictor.ipynb` and `synthetic_loan_data.csv` to Colab
 2. Run all cells top to bottom 
 
