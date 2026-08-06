@@ -11,7 +11,6 @@ repayment-risk check before disbursing small, short-tenor loans.
 ## Table of Contents
 - [Problem Statement](#problem-statement)
 - [Solution Overview](#solution-overview)
-- [Repository Structure](#repository-structure)
 - [Data](#data)
 - [Methodology](#methodology)
 - [Results](#results)
@@ -24,7 +23,7 @@ repayment-risk check before disbursing small, short-tenor loans.
 ## Problem Statement
 
 Across Nigeria, POS agents and micro-lenders extend small, short-term loans to informal
-traders, artisans, and small business owners — often with little to no formal credit history
+traders, artisans, and small business owners  often with little to no formal credit history
 to underwrite against. A wrong call is costly in either direction: lending to a high-risk
 borrower risks non-repayment, while rejecting a genuinely low-risk borrower loses income and
 excludes someone who may be perfectly creditworthy.
@@ -35,7 +34,7 @@ applicant's details (manual input) or a batch of applicants (CSV upload).
 
 ## Solution Overview
 
-- **Input:** borrower demographic, business, POS-transaction, and loan-request data — via
+- **Input:** borrower demographic, business, POS-transaction, and loan-request data via
   manual entry or CSV upload
 - **Output:** a default-risk probability (0–100%), a risk band (Low / Medium / High), and
   the key factors behind the score
@@ -43,24 +42,6 @@ applicant's details (manual input) or a batch of applicants (CSV upload).
   three class-imbalance strategies (baseline, class weighting, SMOTE) — nine variants total
 - **Deployed model:** XGBoost with class weighting (see [Results](#results) for why)
 
-## Repository Structure
-
-```
-.
-├── loan_default_risk_predictor.ipynb   # main notebook: EDA → modeling → evaluation → demo
-├── generate_synthetic_loan_data.py     # synthetic dataset generator (documented, reproducible)
-├── synthetic_loan_data.csv             # generated dataset (20,000 rows)
-├── train.py                            # standalone training script (repo/production version)
-├── predict.py                          # standalone scoring script (manual record or batch CSV)
-├── utils.py                            # shared feature schema + preprocessing pipeline
-├── results/
-│   ├── results_summary.md              # metrics, classification reports, key factors
-│   ├── model_metrics.csv
-│   ├── confusion_matrix_*.png
-│   └── feature_importance_*.png
-├── data_source_justification.md        # why synthetic data was used, and how
-└── README.md
-```
 
 ## Data
 
